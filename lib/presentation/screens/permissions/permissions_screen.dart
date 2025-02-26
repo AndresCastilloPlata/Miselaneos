@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permissions_app/presentation/providers/providers.dart';
 
 class PermissionsScreen extends StatelessWidget {
   const PermissionsScreen({super.key});
@@ -18,13 +19,17 @@ class _PermissionsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final permissions = ref.watch(permissionsProvider);
+
     return ListView(
       children: [
         CheckboxListTile(
           title: const Text('Camara'),
-          subtitle: const Text('Permite acceder a la camara'),
-          value: true,
-          onChanged: (value) {},
+          subtitle: Text('${permissions.camera}'),
+          value: permissions.cameraGranted,
+          onChanged: (value) {
+            ref.read(permissionsProvider.notifier).requestCameraAccess();
+          },
         ),
       ],
     );
