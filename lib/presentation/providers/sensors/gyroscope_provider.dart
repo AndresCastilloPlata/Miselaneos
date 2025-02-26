@@ -7,9 +7,20 @@ class GyroscopeXYZ {
   final double z;
 
   GyroscopeXYZ(this.x, this.y, this.z);
+
+  @override
+  String toString() {
+    return '''
+  X: $x, 
+  Y: $y, 
+  Z: $z,
+      ''';
+  }
 }
 
-final gyroscopeProvider = StreamProvider<GyroscopeXYZ>((ref) async* {
+final gyroscopeProvider = StreamProvider.autoDispose<GyroscopeXYZ>((
+  ref,
+) async* {
   await for (final event in gyroscopeEventStream()) {
     final x = double.parse((event.x.toStringAsFixed(2)));
     final y = double.parse((event.y.toStringAsFixed(2)));
