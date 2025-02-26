@@ -37,6 +37,9 @@ class MainAppState extends ConsumerState<MainApp> with WidgetsBindingObserver {
       detached: La aplicación se cerró.
     */
     ref.read(appStateProvider.notifier).state = state;
+    if (state == AppLifecycleState.resumed) {
+      ref.read(permissionsProvider.notifier).checkPermissions();
+    }
     super.didChangeAppLifecycleState(state);
   }
 
