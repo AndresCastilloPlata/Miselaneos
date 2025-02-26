@@ -26,5 +26,20 @@ final router = GoRouter(
       builder: (context, state) => GyroscopeBallScreen(),
     ),
     GoRoute(path: '/compass', builder: (context, state) => CompassScreen()),
+
+    //* Pokemons
+    GoRoute(
+      path: '/pokemons',
+      builder: (context, state) => PokemonsScreen(),
+      routes: [
+        //todo
+        // GoRoute(
+        //   path: ':id',
+        //   builder: (context, state) {
+        //     return;
+        //   },
+        // ),
+      ],
+    ),
   ],
 );
