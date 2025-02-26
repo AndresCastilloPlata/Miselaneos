@@ -1,15 +1,50 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 // State Notifier Provider
 
-class PermissionsState {
-  late final PermissionStatus camera;
-  late final PermissionStatus photoLibrary;
-  late final PermissionStatus sensors;
+class PermissionsNotifier extends StateNotifier<PermissionsState> {
+  PermissionsNotifier() : super(PermissionsState()) {
+    checkPermissions();
+  }
 
-  late final PermissionStatus location;
-  late final PermissionStatus locationAlways;
-  late final PermissionStatus locationWhenInUse;
+  Future<void> checkPermissions() async {
+    final permissionsArray = await Future.wait([
+      Permission.camera.status,
+      Permission.photos.status,
+      Permission.sensors.status,
+      Permission.location.status,
+      Permission.locationAlways.status,
+      Permission.locationWhenInUse.status,
+    ]);
+
+    state = state.copyWith(
+      camera: permissionsArray[0],
+      photoLibrary: permissionsArray[1],
+      sensors: permissionsArray[2],
+      location: permissionsArray[3],
+      locationAlways: permissionsArray[4],
+      locationWhenInUse: permissionsArray[5],
+    );
+  }
+
+  requestCameraAccess() async {
+    final status = await Permission.camera.request();
+    state = state.copyWith(camera: status);
+
+    if (status == PermissionStatus.permanentlyDenied) {
+      openAppSettings();
+    }
+  }
+}
+
+class PermissionsState {
+  final PermissionStatus camera;
+  final PermissionStatus photoLibrary;
+  final PermissionStatus sensors;
+  final PermissionStatus location;
+  final PermissionStatus locationAlways;
+  final PermissionStatus locationWhenInUse;
 
   PermissionsState({
     this.camera = PermissionStatus.denied,
@@ -21,27 +56,27 @@ class PermissionsState {
   });
 
   get cameraGranted {
-    return camera = PermissionStatus.granted;
+    return camera == PermissionStatus.granted;
   }
 
   get photoLibraryGranted {
-    return photoLibrary = PermissionStatus.granted;
+    return photoLibrary == PermissionStatus.granted;
   }
 
   get sensorsGranted {
-    return sensors = PermissionStatus.granted;
+    return sensors == PermissionStatus.granted;
   }
 
   get locationGranted {
-    return location = PermissionStatus.granted;
+    return location == PermissionStatus.granted;
   }
 
   get locationAlwaysGranted {
-    return locationAlways = PermissionStatus.granted;
+    return locationAlways == PermissionStatus.granted;
   }
 
   get locationWhenInUseGranted {
-    return locationWhenInUse = PermissionStatus.granted;
+    return locationWhenInUse == PermissionStatus.granted;
   }
 
   PermissionsState copyWith({
