@@ -4,7 +4,7 @@ import 'package:permissions_app/infrastructure/infrastructure.dart';
 class PokemonsRepositoryImpl implements PokemonsRepository {
   final PokemonsDatasource datasource;
 
-  PokemonsRepositoryImpl(PokemonsDatasource? datasource)
+  PokemonsRepositoryImpl({PokemonsDatasource? datasource})
     : datasource = datasource ?? PomkemonsDatasourceImpl();
 
   @override
