@@ -10,7 +10,7 @@ class GyroscopeBallScreen extends ConsumerWidget {
     final gyroscope = ref.watch(gyroscopeProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Gyroscope Ball')),
+      appBar: AppBar(title: const Text('Giroscópio Ball')),
 
       body: SizedBox.expand(
         child: gyroscope.when(
@@ -31,10 +31,24 @@ class MovingBall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    double screenWidth = size.width;
+    double screenHeigth = size.height;
+
+    double currentYPos = (y * 150);
+    double currentXPos = (x * 150);
+
     return Stack(
       alignment: Alignment.center,
+
       children: [
-        const Ball(),
+        AnimatedPositioned(
+          left: (currentYPos - 30) + (screenWidth / 2),
+          top: (currentXPos - 30) + (screenHeigth / 2),
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 1000),
+          child: const Ball(),
+        ),
         Text('''
 X: $x,
 Y: $y,
