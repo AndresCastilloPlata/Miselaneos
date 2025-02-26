@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MenuItem {
   final String title;
@@ -11,7 +12,7 @@ class MenuItem {
 final menuItems = <MenuItem>[
   MenuItem('Giróscopio', Icons.downloading_rounded, '/gyroscope'),
   MenuItem('Acelerómetro', Icons.speed_rounded, '/accelerometer'),
-  MenuItem('Magnómetro', Icons.explore_outlined, '/magnetometer'),
+  MenuItem('Magnetómetro', Icons.explore_outlined, '/magnetometer'),
   MenuItem(
     'Giróscopio Ball',
     Icons.sports_baseball_outlined,
@@ -54,11 +55,32 @@ class HomeMenuItem extends StatelessWidget {
     required this.title,
     required this.route,
     required this.icon,
-    this.bgColors = const [Colors.lightBlue, Colors.blueAccent],
+    this.bgColors = const [Colors.lightBlueAccent, Colors.lightBlue],
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: bgColors[0]);
+    return GestureDetector(
+      onTap: () => context.push(route),
+      child: Container(
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          gradient: LinearGradient(
+            colors: bgColors,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 15,
+          children: [
+            Icon(icon, color: Colors.white, size: 40),
+            Text(title, style: TextStyle(color: Colors.white)),
+          ],
+        ),
+      ),
+    );
   }
 }
