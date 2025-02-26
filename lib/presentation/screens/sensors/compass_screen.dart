@@ -21,7 +21,30 @@ class CompassScreen extends ConsumerWidget {
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: const Center(child: Text('aquiles va')),
+      body: Center(child: Compass()),
+    );
+  }
+}
+
+class Compass extends StatelessWidget {
+  const Compass({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: 20,
+      children: [
+        Text('155', style: TextStyle(color: Colors.white, fontSize: 30)),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset('assets/images/compass/quadrant-1.png'),
+            Image.asset('assets/images/compass/needle-1.png'),
+          ],
+        ),
+      ],
     );
   }
 }
