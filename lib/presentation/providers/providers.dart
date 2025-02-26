@@ -7,3 +7,5 @@ export 'sensors/accelerometer_provider.dart';
 export 'sensors/magnometer_provider.dart';
 
 export 'compass/compass_provider.dart';
+
+export 'pokemons/pokemon_list_provider.dart';
