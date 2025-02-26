@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permissions_app/presentation/providers/providers.dart';
 
 class PokemonsScreen extends StatelessWidget {
@@ -84,10 +85,13 @@ class _PokemonGrid extends ConsumerWidget {
         mainAxisSpacing: 2,
       ),
       itemBuilder: (context, index) {
-        return Image.network(
-          //todo: ontap
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png',
-          fit: BoxFit.contain,
+        return GestureDetector(
+          onTap: () => context.push('/pokemons/${index + 1}'),
+          child: Image.network(
+            //todo: ontap
+            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png',
+            fit: BoxFit.contain,
+          ),
         );
       },
     );
