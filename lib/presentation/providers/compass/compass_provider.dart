@@ -8,7 +8,7 @@ final compassArrowProvider = StreamProvider<double?>((ref) async* {
 
   try {
     await for (final event in FlutterCompass.events!) {
-      event.heading;
+      yield event.heading;
     }
   } catch (e) {
     throw Exception('Error getting heading $e');
