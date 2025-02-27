@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permissions_app/Config/config.dart';
 import 'package:permissions_app/domain/domian.dart';
 import 'package:permissions_app/presentation/providers/providers.dart';
 
@@ -26,7 +27,17 @@ class _PokemonView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(pokemon.name)),
+      appBar: AppBar(
+        title: Text(pokemon.name),
+        actions: [
+          IconButton(
+            onPressed: () {
+              SharePlugin.shareLink(pokemon.spriteFront, 'Mira este pókemon');
+            },
+            icon: Icon(Icons.share),
+          ),
+        ],
+      ),
       body: Center(
         child: Image.network(
           pokemon.spriteFront,
