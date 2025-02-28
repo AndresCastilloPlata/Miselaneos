@@ -1,4 +1,4 @@
-package com.example.permissions_app
+package com.andrescastilloplata.permissions_app
 
 import io.flutter.embedding.android.FlutterActivity
 
