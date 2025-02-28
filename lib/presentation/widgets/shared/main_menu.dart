@@ -78,7 +78,7 @@ class HomeMenuItem extends StatelessWidget {
           spacing: 15,
           children: [
             Icon(icon, color: Colors.white, size: 40),
-            Text(title, style: TextStyle(color: Colors.white)),
+            Text(title, style: TextStyle(color: Colors.white, fontSize: 11)),
           ],
         ),
       ),
