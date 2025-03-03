@@ -20,7 +20,7 @@ class LocalAuthPlugin {
     }
   }
 
-  static Future<bool> conCheckBiometrics() async {
+  static Future<bool> canCheckBiometrics() async {
     return await auth.canCheckBiometrics;
   }
 
