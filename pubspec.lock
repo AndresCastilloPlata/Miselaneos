@@ -126,6 +126,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_badge_manager:
+    dependency: "direct main"
+    description:
+      name: flutter_badge_manager
+      sha256: e3d5854838e5940b00cb7c896d1c74cce9bccc49112747431276ff1afc891466
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   flutter_compass:
     dependency: "direct main"
     description:
@@ -791,4 +799,4 @@ packages:
     version: "1.1.0"
 sdks:
   dart: ">=3.7.0 <4.0.0"
-  flutter: ">=3.27.0"
+  flutter: ">=3.27.1"

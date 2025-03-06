@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permissions_app/Config/config.dart';
 import 'package:permissions_app/presentation/providers/providers.dart';
 
 class BadgeScreen extends ConsumerWidget {
@@ -30,6 +31,7 @@ class BadgeScreen extends ConsumerWidget {
             FilledButton.tonal(
               onPressed: () {
                 ref.invalidate(badgeCounterProvider);
+                AppBadgePlugin.removeBadge();
               },
               child: const Text('Borrar Badge'),
             ),
@@ -38,7 +40,11 @@ class BadgeScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref.read(badgeCounterProvider.notifier).state++;
+          // ref.read(badgeCounterProvider.notifier).state++;
+          // AppBadgePlugin.updateBadgeCount(badegCounter + 1);
+
+          final newCount = ref.read(badgeCounterProvider.notifier).state++;
+          AppBadgePlugin.updateBadgeCount(newCount);
         },
         child: Icon(Icons.plus_one_rounded),
       ),
