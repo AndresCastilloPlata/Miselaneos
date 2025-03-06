@@ -18,6 +18,10 @@ class MapState {
     this.controller,
   });
 
+  Set<Marker> get markersSet {
+    return Set.from(markers);
+  }
+
   MapState copyWith({
     bool? isReady,
     bool? followUser,
@@ -85,6 +89,25 @@ class MapNotifier extends StateNotifier<MapState> {
     // trackUser().take(1).listen((event) {
     //   gotToLocation(event.$1, event.$2);
     // });
+  }
+
+  void addMarkerCurrentPosition() {
+    if (lastKnowLocation == null) return;
+    final (latitude, longitude) = lastKnowLocation!;
+    addMarker(latitude, longitude, 'Por aquí pasó el usuario');
+  }
+
+  void addMarker(double latitude, double longitude, String name) {
+    final newMarker = Marker(
+      markerId: MarkerId('${state.markers.length}'),
+      position: LatLng(latitude, longitude),
+      infoWindow: InfoWindow(
+        title: name,
+        snippet: 'Esto es el snippet del info window ',
+      ),
+    );
+
+    state = state.copyWith(markers: [...state.markers, newMarker]);
   }
 }
 
