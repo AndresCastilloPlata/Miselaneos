@@ -5,7 +5,7 @@ class QuickActionsPlugin {
   static registerActions() {
     const QuickActions quickActions = QuickActions();
     quickActions.initialize((shortcutType) {
-      print(shortcutType);
+      // print(shortcutType);
 
       switch (shortcutType) {
         case 'biometric':
