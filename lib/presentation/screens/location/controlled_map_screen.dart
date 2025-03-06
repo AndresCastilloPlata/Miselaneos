@@ -125,6 +125,11 @@ class __MapViewState extends ConsumerState<_MapView> {
         // _controller.complete(controller);
         ref.read(mapControllerProvider.notifier).setMapController(controller);
       },
+      onLongPress: (latLng) {
+        ref
+            .read(mapControllerProvider.notifier)
+            .addMarker(latLng.latitude, latLng.longitude, 'Custom Marker');
+      },
     );
   }
 }
