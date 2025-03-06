@@ -9,10 +9,11 @@ class ControlledMapScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final watchUserLocation = ref.watch(watchLocationProvider);
+    final userInitialLocation = ref.watch(userLocationProvider);
+    // final watchUserLocation = ref.watch(watchLocationProvider);
 
     return Scaffold(
-      body: watchUserLocation.when(
+      body: userInitialLocation.when(
         data: (data) => MapAndControls(latitude: data.$1, longitude: data.$2),
         error: (error, stackTrace) => Text('Error: $error'),
         loading: () => Center(child: const Text('Ubicando usuario')),
@@ -33,6 +34,8 @@ class MapAndControls extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mapControllerState = ref.watch(mapControllerProvider);
+
     return Stack(
       children: [
         _MapView(initialLat: latitude, initialLng: longitude),
@@ -65,9 +68,14 @@ class MapAndControls extends ConsumerWidget {
           bottom: 90,
           left: 20,
           child: IconButton.filledTonal(
-            onPressed: () {},
-            icon: const Icon(Icons.directions_run_outlined),
-            // icon: const Icon(Icons.accessibility_new_outlined),
+            onPressed: () {
+              ref.read(mapControllerProvider.notifier).toogleFollowUser();
+            },
+            icon: Icon(
+              mapControllerState.followUser
+                  ? Icons.directions_run_outlined
+                  : Icons.accessibility_new_outlined,
+            ),
           ),
         ),
         //* Crear marcador
