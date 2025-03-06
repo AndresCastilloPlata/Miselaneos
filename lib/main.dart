@@ -6,6 +6,9 @@ import 'package:permissions_app/presentation/providers/providers.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  QuickActionsPlugin.registerActions();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(ProviderScope(child: const MainApp()));
 }
