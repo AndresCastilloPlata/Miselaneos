@@ -1,3 +1,4 @@
+import 'package:permissions_app/Config/config.dart';
 import 'package:quick_actions/quick_actions.dart';
 
 class QuickActionsPlugin {
@@ -8,12 +9,16 @@ class QuickActionsPlugin {
 
       switch (shortcutType) {
         case 'biometric':
+          router.push('/biometrics');
           break;
         case 'compass':
+          router.push('/compass');
           break;
         case 'pokemons':
+          router.push('/pokemons');
           break;
         case 'charmander':
+          router.push('/pokemons/4');
           break;
       }
 
